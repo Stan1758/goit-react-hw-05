@@ -1,0 +1,26 @@
+.reviewList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.reviewItem {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+}
+
+.reviewAuthor {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0078d4;
+}
+
+.reviewContent {
+  white-space: pre-wrap; /* щоб зберігати перенос рядків */
+  line-height: 1.4;
+}

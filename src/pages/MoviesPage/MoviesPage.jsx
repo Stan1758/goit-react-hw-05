@@ -2,19 +2,22 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import MovieList from "../../components/MovieList/MovieList";
+import styles from "./MoviesPage.module.css";
 
 const TMDB_API_KEY = "93b0cb79b3b41e5fc3225902a3f867e9";
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query") || "";
+  const queryParam = searchParams.get("query") || "";
+  const [query, setQuery] = useState(queryParam);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    if (!query) {
+    if (!queryParam) {
       setMovies([]);
+      setError(null);
       return;
     }
 
@@ -23,7 +26,7 @@ const MoviesPage = () => {
         setError(null);
         const response = await axios.get(
           `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
-            query
+            queryParam
           )}`
         );
 
@@ -40,36 +43,48 @@ const MoviesPage = () => {
     };
 
     fetchMovies();
-  }, [query]);
+  }, [queryParam]);
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const input = e.currentTarget.elements.query.value.trim();
+    const trimmedQuery = query.trim();
 
-    if (!input) {
+    if (!trimmedQuery) {
       setError("Введіть ключове слово для пошуку");
       setMovies([]);
       setSearchParams({});
       return;
     }
 
-    setSearchParams({ query: input });
+    setSearchParams({ query: trimmedQuery });
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Пошук фільмів</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           name="query"
           placeholder="Введіть назву фільму"
-          defaultValue={query}
+          value={query}
+          onChange={handleInputChange}
+          className={styles.input}
         />
-        <button type="submit">Пошук</button>
+        <button type="submit" className={styles.button}>
+          Пошук
+        </button>
       </form>
-      {error && <p>{error}</p>}
-      <MovieList movies={movies} state={{ from: location }} />
+
+      {error && <p className={styles.error}>{error}</p>}
+
+      {movies.length > 0 && (
+        <MovieList movies={movies} state={{ from: location }} />
+      )}
     </div>
   );
 };

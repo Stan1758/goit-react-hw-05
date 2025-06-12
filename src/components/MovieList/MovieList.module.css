@@ -1,0 +1,43 @@
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.movieItem {
+  width: 200px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.movieLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.movieLink:hover {
+  transform: scale(1.05);
+}
+
+.movieImg {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  aspect-ratio: 2 / 3; /* 200x300 */
+  margin-bottom: 8px;
+}
+
+.movieTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}

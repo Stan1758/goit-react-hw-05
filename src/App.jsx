@@ -12,7 +12,6 @@ const MovieReviews = lazy(() =>
   import("./components/MovieReviews/MovieReviews")
 );
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
-
 const HomePage = lazy(() => import("../src/pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("../src/pages/MoviesPage/MoviesPage"));
 

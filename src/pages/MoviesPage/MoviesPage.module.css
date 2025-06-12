@@ -1,0 +1,40 @@
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.form {
+  margin-bottom: 1rem;
+  margin: 10 auto;
+}
+
+.input {
+  padding: 8px;
+  width: 70%;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.811);
+  background-color: #fff;
+}
+
+.button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #0078d4;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #005a9e;
+}
+
+.error {
+  color: red;
+}

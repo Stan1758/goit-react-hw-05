@@ -1,0 +1,13 @@
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #555;
+}
+
+.loaderText {
+  font-size: 1.2rem;
+  font-weight: 500;
+}

@@ -1,0 +1,37 @@
+.castList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.castItem {
+  width: 150px;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.castImg {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  aspect-ratio: 2 / 3; /* Пропорції 150x225 */
+  margin-bottom: 8px;
+}
+
+.castName {
+  font-weight: 700;
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.castCharacter {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,25 @@
+.nav {
+  background-color: #f9f9f9;
+  padding: 10px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.link {
+  text-decoration: none;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #0078d4;
+}
+
+.activeLink {
+  color: #0078d4;
+  padding-bottom: 2px;
+}

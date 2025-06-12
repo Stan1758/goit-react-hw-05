@@ -1,7 +1,9 @@
+import s from "./Loader.module.css";
+
 const Loader = () => {
   return (
-    <div style={{ textAlign: "center", padding: "2rem" }}>
-      <p>Завантаження...</p>
+    <div className={s.loaderContainer}>
+      <p className={s.loaderText}>Завантаження...</p>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import s from "./MovieReviews.module.css";
 
 const TMDB_API_KEY = "93b0cb79b3b41e5fc3225902a3f867e9";
 
@@ -16,6 +17,7 @@ const MovieReviews = () => {
           `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${TMDB_API_KEY}`
         );
         setReviews(response.data.results);
+        setError(null);
       } catch {
         setError("Не вдалося завантажити огляди");
       }
@@ -27,24 +29,11 @@ const MovieReviews = () => {
   if (!reviews.length) return <p>Огляди відсутні</p>;
 
   return (
-    <ul
-      style={{
-        padding: 0,
-        listStyle: "none",
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-      }}
-    >
+    <ul className={s.reviewList}>
       {reviews.map(({ id, author, content }) => (
-        <li
-          key={id}
-          style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}
-        >
-          <p>
-            <strong>Автор:</strong> {author}
-          </p>
-          <p>{content}</p>
+        <li key={id} className={s.reviewItem}>
+          <p className={s.reviewAuthor}>Автор: {author}</p>
+          <p className={s.reviewContent}>{content}</p>
         </li>
       ))}
     </ul>

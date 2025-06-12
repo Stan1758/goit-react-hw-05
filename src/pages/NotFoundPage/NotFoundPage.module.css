@@ -1,0 +1,46 @@
+.notfoundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: inherit;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+.notfoundCard {
+  background: white;
+  padding: 40px 60px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  color: #333;
+}
+
+.notfoundCard h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.notfoundCard p {
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  color: #666;
+}
+
+.homeLink {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #0078d4a2;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.homeLink:hover {
+  background-color: #005a9ebb;
+}

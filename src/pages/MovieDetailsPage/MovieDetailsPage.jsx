@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import axios from "axios";
+import s from "./MovieDetailsPage.module.css";
 
 const TMDB_API_KEY = "93b0cb79b3b41e5fc3225902a3f867e9";
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
@@ -40,7 +41,7 @@ const MovieDetailsPage = () => {
   };
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className={s.error}>{error}</p>;
   }
 
   if (!movie) {
@@ -48,44 +49,52 @@ const MovieDetailsPage = () => {
   }
 
   return (
-    <div>
-      <button onClick={handleGoBack}>Go back</button>
-      <h2>{movie.title}</h2>
-      <img src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt={movie.title} />
-      <p>Реліз: {movie.release_date}</p>
-      <p>Рейтинг: {movie.vote_average}</p>
-      <p>{movie.overview}</p>
+    <div className={s.container}>
+      <button className={s.backButton} onClick={handleGoBack}>
+        ← Назад
+      </button>
 
-      {/* Навігація по вкладках */}
-      <nav style={{ marginTop: "20px" }}>
-        {/* <NavLink
-          to=""
-          end
-          style={({ isActive }) => ({
-            fontWeight: isActive ? "bold" : "normal",
-            marginRight: "10px",
-          })}
-        >
-          Details
-        </NavLink> */}
+      <div className={s.movieInfo}>
+        <img
+          className={s.poster}
+          src={
+            movie.poster_path
+              ? `${BASE_IMAGE_URL}${movie.poster_path}`
+              : "https://via.placeholder.com/300x450?text=No+Poster"
+          }
+          alt={movie.title}
+        />
+        <div className={s.details}>
+          <h2 className={s.title}>{movie.title}</h2>
+          <p>
+            <b>Реліз:</b> {movie.release_date}
+          </p>
+          <p>
+            <b>Рейтинг:</b> {movie.vote_average}
+          </p>
+          <p>{movie.overview}</p>
+        </div>
+      </div>
+
+      <nav className={s.nav}>
         <NavLink
           to="cast"
           state={{ from: location.state?.from || "/" }}
-          style={{ marginRight: "10px" }}
+          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
         >
-          Cast
+          Актори
         </NavLink>
 
-        <NavLink to="reviews" state={{ from: location.state?.from || "/" }}>
-          Reviews
+        <NavLink
+          to="reviews"
+          state={{ from: location.state?.from || "/" }}
+          className={({ isActive }) => (isActive ? s.activeNavLink : s.navLink)}
+        >
+          Огляди
         </NavLink>
-
-        <Outlet />
-        {/* Можна пізніше додати Reviews */}
-        {/* <NavLink to="reviews" style={({ isActive }) => ({ fontWeight: isActive ? "bold" : "normal" })}>
-          Reviews
-        </NavLink> */}
       </nav>
+
+      <Outlet />
     </div>
   );
 };
