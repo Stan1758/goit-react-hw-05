@@ -1,24 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w300";
 
 const MovieList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <ul
       style={{
         display: "flex",
         flexWrap: "wrap",
-        gap: "20px",
+        gap: "10px",
         listStyle: "none",
-        padding: 0,
       }}
     >
       {movies.map((movie) => (
         <li key={movie.id} style={{ width: "200px" }}>
-          <Link
-            to={`/movies/${movie.id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
+          <Link to={`/movies/${movie.id}`} state={{ from: location }}>
             <img
               src={
                 movie.poster_path

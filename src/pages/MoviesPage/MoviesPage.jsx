@@ -1,46 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import MovieList from "../../components/MovieList/MovieList";
 
 const TMDB_API_KEY = "93b0cb79b3b41e5fc3225902a3f867e9";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const location = useLocation();
 
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!query.trim()) {
-      setError("Введіть ключове слово для пошуку");
+  useEffect(() => {
+    if (!query) {
       setMovies([]);
       return;
     }
 
-    try {
-      setError(null);
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
-          query
-        )}`
-      );
+    const fetchMovies = async () => {
+      try {
+        setError(null);
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
+            query
+          )}`
+        );
 
-      if (response.data.results.length === 0) {
-        setError("Нічого не знайдено");
+        if (response.data.results.length === 0) {
+          setError("Нічого не знайдено");
+          setMovies([]);
+        } else {
+          setMovies(response.data.results);
+        }
+      } catch (err) {
+        setError("Помилка під час пошуку фільмів");
         setMovies([]);
-      } else {
-        setMovies(response.data.results);
       }
-    } catch (err) {
-      setError("Помилка під час пошуку фільмів");
+    };
+
+    fetchMovies();
+  }, [query]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const input = e.currentTarget.elements.query.value.trim();
+
+    if (!input) {
+      setError("Введіть ключове слово для пошуку");
       setMovies([]);
-      console.error(err);
+      setSearchParams({});
+      return;
     }
+
+    setSearchParams({ query: input });
   };
 
   return (
@@ -49,14 +62,14 @@ const MoviesPage = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          name="query"
           placeholder="Введіть назву фільму"
-          value={query}
-          onChange={handleChange}
+          defaultValue={query}
         />
         <button type="submit">Пошук</button>
       </form>
       {error && <p>{error}</p>}
-      <MovieList movies={movies} />
+      <MovieList movies={movies} state={{ from: location }} />
     </div>
   );
 };

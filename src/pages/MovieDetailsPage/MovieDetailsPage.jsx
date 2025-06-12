@@ -36,11 +36,7 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const handleGoBack = () => {
-    if (location.state?.from) {
-      navigate(location.state.from);
-    } else {
-      navigate("/movies");
-    }
+    navigate(location.state?.from || "/movies");
   };
 
   if (error) {
@@ -74,14 +70,16 @@ const MovieDetailsPage = () => {
         </NavLink> */}
         <NavLink
           to="cast"
-          style={({ isActive }) => ({
-            fontWeight: isActive ? "bold" : "normal",
-            marginRight: "10px",
-          })}
+          state={{ from: location.state?.from || "/" }}
+          style={{ marginRight: "10px" }}
         >
           Cast
         </NavLink>
-        <NavLink to="reviews">Reviews</NavLink>
+
+        <NavLink to="reviews" state={{ from: location.state?.from || "/" }}>
+          Reviews
+        </NavLink>
+
         <Outlet />
         {/* Можна пізніше додати Reviews */}
         {/* <NavLink to="reviews" style={({ isActive }) => ({ fontWeight: isActive ? "bold" : "normal" })}>
